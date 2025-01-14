@@ -1,3 +1,10 @@
+import Col from "react-bootstrap/Col";
+import Container from "react-bootstrap/Container";
+
+import CustomAlert from "./CustomAlert.jsx";
+import Header from "./Header.jsx";
+import Pokedex from "./Pokedex.jsx";
+
 import useSWR, { fetcher } from "./swr.js";
 
 const POKE_API = "https://pokeapi.co/api/v2/pokemon?limit=151";
@@ -8,23 +15,27 @@ function App() {
   let output;
 
   if (error) {
-    output = <p>Failed to load Pokémon. Try again later.</p>;
-  } else if (isLoading) {
-    output = <p>Loading...</p>;
-  } else {
     output = (
-      <ol className="text-capitalize">
-        {data.results.map((pokemon) => (
-          <li key={pokemon.name}>{pokemon.name}</li>
-        ))}
-      </ol>
+      <Col md={6} className="mx-auto">
+        <CustomAlert variant="danger">
+          Failed to load Pokémon. Try again later.
+        </CustomAlert>
+      </Col>
     );
+  } else if (isLoading) {
+    output = (
+      <Col md={6} className="mx-auto">
+        <CustomAlert variant="info">Loading...</CustomAlert>
+      </Col>
+    );
+  } else {
+    output = <Pokedex pokedex={data.results} />;
   }
 
   return (
     <>
-      <h1>Pokéverse</h1>
-      {output}
+      <Header />
+      <Container className="my-4">{output}</Container>
     </>
   );
 }
