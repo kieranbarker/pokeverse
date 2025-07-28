@@ -39,11 +39,19 @@ function App() {
           />
         </Col>
       </Row>
-      <Row>
+      <Row as="ul" className="list-unstyled">
         {data.results
           .filter((pokemon) => pokemon.name.includes(search.toLowerCase()))
           .map((pokemon) => (
-            <Col sm={6} md={4} lg={3} xl={2} className="p-2" key={pokemon.name}>
+            <Col
+              as="li"
+              sm={6}
+              md={4}
+              lg={3}
+              xl={2}
+              className="p-2"
+              key={pokemon.name}
+            >
               <PokemonCard {...pokemon} />
             </Col>
           ))}

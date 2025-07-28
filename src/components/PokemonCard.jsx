@@ -32,6 +32,7 @@ function PokemonCard({ name, url }) {
         width={96}
         height={96}
         className="align-self-center w-auto"
+        alt=""
       />
       <Card.Body className="text-center">
         <Card.Title className="text-capitalize">{name}</Card.Title>
